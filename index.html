@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<!-- Ref. https://stackoverflow.com/questions/33545779/xmlhttprequest-setrequestheader-for-each-request -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  <title> Spotify test + query </title>
+</head>
+<body>
+<!--  -->
+
+<div id="site">
+  <div id="conRight">
+<img src="Logo_GeoSpot-ify_final.png" alt="Logo GeoSpot-ify">
+
+
+<!-- <p>Step 1: Obtain an authorization token from Spotify (see file in Google how to obtain one) <br>
+https://developer.spotify.com/console/get-search-item/?q=abba&type=track&market=US&limit=&offset=&include_external=<br>-->
+
+<section>
+
+  <p id="loadImage"></p>
+
+<p><b><u>To start this application you need GraphDB and an authorization token from Spotify, all other choices are optional!</u></b></p>
+<a href="https://youtu.be/03F0ZY24G8c">Click here for instructions on how to set up GraphDB</a><br>
+<a href="https://youtu.be/RZVEJOCifpM">Click here for instructions to get an authorization token</a><br><br><br>
+
+<label for="authorizationToken"><b>Authorization token:</b></label><br>
+<input type="text" id="authorization" name="authorization"><br><br><br>
+
+
+<label for="genre"><b>Genre:</b></label><br>
+<div id='wrapper'>
+  <button id='Techno'><img src="Techno.png" id='Techno'></button>
+  <button id='Country'><img src="Country.png" id="Country"></button>
+  <button id='Rock'><img src="Rock.png" id='Rock'></button>
+  <button id='Soul'><img src="Soul.png" id='Soul'></button>
+  <button id='Pop'><img src="Pop.png" id='Pop'></button><br>
+  <button id='Hip Hop'><img src="Hip_Hop.png"id='Hip Hop'></button>
+  <button id='Jazz'><img src="Jazz.png" id='Jazz'></button>
+  <button id='Classical'><img src="Classical.png" id='Classical'></button>
+  <button id='Dance'><img src="Dance.png" id='Dance'></button>
+  <button id=''><b><img src="All.png" id=''></b></button>
+</div><br><br>
+
+
+<div class="slidercontainer">
+  <label for="year"><b>Year of publication:</b></label><br>
+  <input type="range" min="1950" max="2020" value="2020" class="slider" id="publicationYear"> <p><span id="yearOfPublication"></span></p>
+</div><br>
+
+
+<label for="countryID"><b>Country of origin:</b> </label><br>
+<input type="text" id="countryID" name="Country"><br><br>
+
+
+<p><b>Gender:</b></p>
+<input type="radio" id="genderIDFemale" name="genderArtist" value="Female">
+<label for="genderFemale">Female</label><br>
+<input type="radio" id="genderIDMale" name="genderArtist" value="Male">
+<label for="genderMale">Male</label><br><br><br>
+
+
+
+<div class="slidercontainer">
+  <label for="age"><b>Minimum age of the artist:</b></label><br>
+  <input type="range" min="0" max="99" value="0" class="slider" id="ageMAX"> <p><span id="yearMaxAge"></span></p>
+</div><br>
+
+
+<div class="slidercontainer">
+<label for="age"><b>Maximum age of the artist:</b></label><br>
+  <input type="range" min="1" max="100" value="100" class="slider" id="ageMIN"> <p><span id="yearMinAge"></span></p>
+</div><br>
+
+<p><b>Artist type</b></p>
+<input type="radio" id="soloArtist" name="typeArtistRadio" value="soloArtist">
+<label for="soloArtist">Solo Artists</label><br>
+<input type="radio" id="groupArtist" name="typeArtistRadio" value="soloArtist">
+<label for="soloArtist">Group of Artists</label><br>
+<input type="radio" id="allArtists" name="typeArtistRadio" value="allArtists" checked="checked">
+<label for="allArtists">All Artists</label><br>
+<br>
+<p><b>Select type of query</b> (We suggest the Simple query)</p>
+<input type="radio" id="simpleQuery" name="queryRadio" value="simpleQuery" checked="checked">
+<label for="simpleQuery">Simple Query (Does not work for artists with special characters in their name, but gets the information relatively fast)</label><br>
+<input type="radio" id="extensiveQuery" name="queryRadio" value="extensiveQuery" >
+<label for="extensiveQuery">Extensive Query (Will work for artists with a special character, but can take very long! (3-4 minutes per query))</label><br>
+<br><br>
+
+<button type="button" id="testQuery" onclick="retrieveInfo()"><b>GO!</b></button>
+<!-- <button type="button" id="testMap" onclick="addPointers()">GO!</button> -->
+</section>
+
+  </div>
+  <div id="conLeft">
+<div id="artistMapID"></div>
+<p id="tableTitle"><b>Ten most popular songs based on your preferences!</b></p>
+
+<table id="table" border="1">
+  <tr>
+    <th></th>
+    <th><b>Preview</b></th>
+    <th><b>Song</b></th>
+    <th><b>Artist</b></th>
+  </tr>
+</table>
+
+<p id="demo"></p>
+
+<div id="artistMapID"></div>
+
+  </div>
+</div>
+
+<!-- JavaScript libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/Chart.min.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>

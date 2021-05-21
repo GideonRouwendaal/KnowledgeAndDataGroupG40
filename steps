@@ -1,0 +1,40 @@
+<!-- Ref. https://developer.spotify.com/documentation/web-api/reference/search/search/ -->
+
+Step 1: obtain an authorization token from Spotify (see file in Google how to obtain one)
+Step 2: enter the authorization token in the input field
+Step 3: open graphDB and (for now) open a random repository. Copy the localhost address and paste this in the main.js --> line 3 as the localHostURL
+Step 4: enter a Genre
+Step 5: enter a Year
+Step 6: open your console (f12 on windows) to look at the results :)
+
+<TO DO>
+  What to do if artist/genre/year has not been entered? There should be a standard!
+  From input --> JSON and retrieve the relevant info, fixed!
+  From relevant info --> array, fixed!
+  Perform a search query on the artists, fixed!
+  Solo artist? fixed!
+  Band / 2+ artists? need to be fixed, check with music ontology!
+
+Before every q there should be the following: https://api.spotify.com/v1/search? !!!!
+
+Only want albums from a specific year? E.g. only 2020
+  q=year:2020
+
+Only want albums from a specific year range? E.g. only 2015-2020
+  q=year:2015-2020
+
+Only want albums from a specific genre? E.g. only House
+  q=genre:house
+  *note that if you want hip-hop, you need to first encode it in URI using the encodeURI function)
+
+To get artists who produce techno:
+  q=%20genre:%22techno%22&type=artist"
+
+To get songs with the genre techno (limited to 4 songs):
+  q=%20genre:%22techno%22&type=track&limit=4
+
+To get songs with the genre (limited to 4 songs), released in 2020:
+  q=year:2020%20genre:%22techno%22&type=track&limit=4
+
+To get songs with the genre (limited to 4 songs), released in 2020, of the artist Charlotte de Witte:
+  query=year:2020%20genre:%22techno%22%20artist%3ACharlotte+de+Witte&type=track&offset=0&limit=20

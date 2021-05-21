@@ -1,0 +1,176 @@
+html,body {
+    padding: 0px;
+    margin: 0px;
+    margin-left: 10px;
+    height: 100%;
+    /* background: linear-gradient(90deg, #FFFFFF 50%, #03A9F4 50%);
+    /* overflow: hidden; */
+}
+
+* {
+  boz-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    /* margin-right: auto; */
+}
+
+p, label, a, table {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+  font-size: 20px;
+}
+
+section {
+    height: 50%;
+    position: relative;
+    margin: 2px;
+    font-size: 14px;
+}
+
+button {
+    background-color: #03A9F4;
+    border: line;
+    border-radius: 6px;
+    color: white;
+    padding: 5px 5px 5px 5;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    width: 18vh;
+    height: 17vh;
+    transition-duration: 0.4s;
+}
+
+button:style{
+  width: 10px;
+  height: 10px;
+}
+
+button:hover{
+  background-color: #0000a5;
+}
+
+button:focus{
+  background-color: #000058;
+}
+
+
+#loadImage{
+  display: block;
+  margin: 0;
+  position: absolute;               /* 2 */
+  top: 50%;
+  left: 90%;
+}
+
+#tableTitle{
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+}
+
+#table{
+  float:right;
+  width:100%;
+  height:20vw;
+  color: white;
+}
+
+
+#conRight{
+   float:left;
+   padding: 0;
+   margin: 0;
+   width:50%;
+   background:#FFFFFF;
+   height: 100vh;
+}
+
+#conLeft{
+    background:#03A9F4;
+    padding: 0;
+    margin: 0;
+    width:50%;
+    float:right;
+    height: 100%;
+}
+
+#site{
+    background:#FFFFFF;
+}
+
+#yearOfPublication, #yearMaxAge, #yearMinAge{
+  float:right;
+  display: inline;
+  margin-right: 30%;
+  height: 40%;
+}
+
+.slidecontainer {
+  width: 20%; /* Width of the outside container */
+  float: left;
+}
+
+
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 70%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #03A9F4;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+#artistMapID{
+    width: 100%;
+    height: 400px;
+}
+
+#search-form, .form-control {
+    margin-bottom: 20px;
+}
+
+.cover {
+    width: 300px;
+    display: inline-block;
+    height: 300px;
+    background-size: cover;
+}
+.cover:hover {
+    cursor: pointer;
+}
+.cover.playing {
+    border: 5px solid #e45343;
+}
