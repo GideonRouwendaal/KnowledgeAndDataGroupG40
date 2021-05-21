@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html ng-App="KRRclass" lang="en">
+<html lang="en">
 
 <!-- Ref. https://stackoverflow.com/questions/33545779/xmlhttprequest-setrequestheader-for-each-request -->
 <head>
@@ -8,50 +8,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title> Spotify test + query </title>
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin=""/>
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
+  <title> Spotify test + query </title>
 </head>
-<!-- <body ng-controller="MainCtrl"> -->
 <body>
-<h2>Test to retrieve information Spotify API and perform a simple query</h2>
+<!--  -->
 
-<p>Step 1: obtain an authorization token from Spotify (see file in Google how to obtain one), https://developer.spotify.com/console/get-search-item/?q=abba&type=track&market=US&limit=&offset=&include_external=<br>
-Step 2: enter the authorization token in the input field<br>
-Step 3: Enter an artist<br>
-Step 4: enter a Genre<br>
-Step 5: enter a Year<br>
-Note: you should fill in all these steps in order to let this test work! If there is no preview url, there will be no play-object...<br>
-</p>
+<div id="site">
+  <div id="conRight">
+<img src="Logo_GeoSpot-ify_final.png" alt="Logo GeoSpot-ify">
 
-<p id="loadImage"></p>
 
-<label for="authorizationToken">Enter the authorization token:</label>
-<input type="text" id="authorization" name="authorization"><br><br>
+<!-- <p>Step 1: Obtain an authorization token from Spotify (see file in Google how to obtain one) <br>
+https://developer.spotify.com/console/get-search-item/?q=abba&type=track&market=US&limit=&offset=&include_external=<br>-->
 
-<label for="genre">Enter the genre: </label>
-<input type="text" id="genre" name="Genre"><br><br>
+<section>
 
-<label for="year">Enter the year of publication: </label>
-<input type="text" id="publicationYear" name="Year"><br><br>
+  <p id="loadImage"></p>
 
-<label for="countryID">Enter the country of origin: </label>
+<p><b><u>To start this application you need GraphDB and an authorization token from Spotify, all other choices are optional!</u></b></p>
+<a href="https://youtu.be/03F0ZY24G8c">Click here for instructions on how to set up GraphDB</a><br>
+<a href="https://youtu.be/RZVEJOCifpM">Click here for instructions to get an authorization token</a><br><br><br>
+
+<label for="authorizationToken"><b>Authorization token:</b></label><br>
+<input type="text" id="authorization" name="authorization"><br><br><br>
+
+
+<label for="genre"><b>Genre:</b></label><br>
+<div id='wrapper'>
+  <button id='Techno'><img src="Techno.png" id='Techno'></button>
+  <button id='Country'><img src="Country.png" id="Country"></button>
+  <button id='Rock'><img src="Rock.png" id='Rock'></button>
+  <button id='Soul'><img src="Soul.png" id='Soul'></button>
+  <button id='Pop'><img src="Pop.png" id='Pop'></button><br>
+  <button id='Hip Hop'><img src="Hip_Hop.png"id='Hip Hop'></button>
+  <button id='Jazz'><img src="Jazz.png" id='Jazz'></button>
+  <button id='Classical'><img src="Classical.png" id='Classical'></button>
+  <button id='Dance'><img src="Dance.png" id='Dance'></button>
+  <button id=''><b><img src="All.png" id=''></b></button>
+</div><br><br>
+
+
+<div class="slidercontainer">
+  <label for="year"><b>Year of publication:</b></label><br>
+  <input type="range" min="1950" max="2020" value="2020" class="slider" id="publicationYear"> <p><span id="yearOfPublication"></span></p>
+</div><br>
+
+
+<label for="countryID"><b>Country of origin:</b> </label><br>
 <input type="text" id="countryID" name="Country"><br><br>
 
-<label for="gender">Enter the gender of the artist: </label>
-<input type="text" id="genderID" name="gender"><br><br>
 
-<label for="age">Enter the minimum age of the artist: </label>
-<input type="text" id="ageMAX" name="age"><br><br>
+<p><b>Gender:</b></p>
+<input type="radio" id="genderIDFemale" name="genderArtist" value="Female">
+<label for="genderFemale">Female</label><br>
+<input type="radio" id="genderIDMale" name="genderArtist" value="Male">
+<label for="genderMale">Male</label><br><br><br>
 
-<label for="age">Enter the maximum age of the artist: </label>
-<input type="text" id="ageMIN" name="age"><br><br>
 
-<p>Please select if you want Solo Artists, Group of Artists, or both.</p>
+
+<div class="slidercontainer">
+  <label for="age"><b>Minimum age of the artist:</b></label><br>
+  <input type="range" min="0" max="99" value="0" class="slider" id="ageMAX"> <p><span id="yearMaxAge"></span></p>
+</div><br>
+
+
+<div class="slidercontainer">
+<label for="age"><b>Maximum age of the artist:</b></label><br>
+  <input type="range" min="1" max="100" value="100" class="slider" id="ageMIN"> <p><span id="yearMinAge"></span></p>
+</div><br>
+
+<p><b>Artist type</b></p>
 <input type="radio" id="soloArtist" name="typeArtistRadio" value="soloArtist">
 <label for="soloArtist">Solo Artists</label><br>
 <input type="radio" id="groupArtist" name="typeArtistRadio" value="soloArtist">
@@ -59,23 +92,37 @@ Note: you should fill in all these steps in order to let this test work! If ther
 <input type="radio" id="allArtists" name="typeArtistRadio" value="allArtists" checked="checked">
 <label for="allArtists">All Artists</label><br>
 <br>
-<p> Please select if you want to perform the "Simple query" or the "Extensive query", we suggest the Simple query</p>
+<p><b>Select type of query</b> (We suggest the Simple query)</p>
 <input type="radio" id="simpleQuery" name="queryRadio" value="simpleQuery" checked="checked">
-<label for="simpleQuery">Simple Query (will often works, however does not work for artists with special characters, get the information relatively fast)</label><br>
+<label for="simpleQuery">Simple Query (Does not work for artists with special characters in their name, but gets the information relatively fast)</label><br>
 <input type="radio" id="extensiveQuery" name="queryRadio" value="extensiveQuery" >
-<label for="extensiveQuery">Extensive Query (will work for artists with a special character, but can take very long! (3-4 minutes per query)</label><br>
-<br>
+<label for="extensiveQuery">Extensive Query (Will work for artists with a special character, but can take very long! (3-4 minutes per query))</label><br>
+<br><br>
 
-<button type="button" id="testQuery" onclick="retrieveInfo()">GO!</button>
-<button type="button" id="testMap" onclick="addPointers()">GO!</button>
+<button type="button" id="testQuery" onclick="retrieveInfo()"><b>GO!</b></button>
+<!-- <button type="button" id="testMap" onclick="addPointers()">GO!</button> -->
+</section>
+
+  </div>
+  <div id="conLeft">
+<div id="artistMapID"></div>
+<p id="tableTitle"><b>Ten most popular songs based on your preferences!</b></p>
+
+<table id="table" border="1">
+  <tr>
+    <th></th>
+    <th><b>Preview</b></th>
+    <th><b>Song</b></th>
+    <th><b>Artist</b></th>
+  </tr>
+</table>
 
 <p id="demo"></p>
 
 <div id="artistMapID"></div>
 
-<style>
-#artistMapID { width: 800px; height: 400px; }
-</style>
+  </div>
+</div>
 
 <!-- JavaScript libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

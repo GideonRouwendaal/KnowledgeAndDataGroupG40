@@ -1,0 +1,273 @@
+@prefix : <http://www.example.com/vu/> .
+@prefix mo: <http://purl.org/ontology/mo/> .
+@prefix vu: <http://www.example.com/vu/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix wgs: <https://www.w3.org/2003/01/geo/wgs84_pos/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <http://www.example.com/vu/> .
+
+<http://www.example.com/vu/> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/ontology/mo/origin
+mo:origin rdf:type owl:ObjectProperty ;
+          owl:equivalentProperty vu:hasCountryOfOrigin .
+
+
+###  http://www.example.com/vu/hasContinentLabel
+vu:hasContinentLabel rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf vu:hasLabel .
+
+
+###  http://www.example.com/vu/hasCountry
+vu:hasCountry rdf:type owl:ObjectProperty .
+
+
+###  http://www.example.com/vu/hasCountryLabel
+vu:hasCountryLabel rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf vu:hasLabel .
+
+
+###  http://www.example.com/vu/hasCountryOfOrigin
+vu:hasCountryOfOrigin rdf:type owl:ObjectProperty ,
+                               owl:FunctionalProperty .
+
+
+###  http://www.example.com/vu/hasLabel
+vu:hasLabel rdf:type owl:ObjectProperty .
+
+
+###  http://www.example.com/vu/hasMusicBrainzID
+vu:hasMusicBrainzID rdf:type owl:ObjectProperty ,
+                             owl:InverseFunctionalProperty .
+
+
+###  http://www.example.com/vu/hasMusicFestival
+vu:hasMusicFestival rdf:type owl:ObjectProperty .
+
+
+###  http://www.example.com/vu/hasPoint
+vu:hasPoint rdf:type owl:ObjectProperty ,
+                     owl:InverseFunctionalProperty .
+
+
+###  http://www.example.com/vu/hasReceivedAward
+vu:hasReceivedAward rdf:type owl:ObjectProperty .
+
+
+###  http://www.example.com/vu/hasRecordLabel
+vu:hasRecordLabel rdf:type owl:ObjectProperty .
+
+
+###  http://www.example.com/vu/isOfContinent
+vu:isOfContinent rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/2002/07/owl#sameAs
+owl:sameAs rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#broader
+skos:broader rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.example.com/vu/hasDateOfBirth
+vu:hasDateOfBirth rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty .
+
+
+###  http://www.example.com/vu/hasGender
+vu:hasGender rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty .
+
+
+###  http://www.example.com/vu/hasName
+vu:hasName rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/ontology/mo/MusicArtist
+mo:MusicArtist rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                     owl:onProperty vu:hasRecordLabel ;
+                                     owl:someValuesFrom vu:RecordLabel
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty vu:hasMusicBrainzID ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass vu:MusicBrainzID
+                                   ] ;
+               rdfs:subClassOf foaf:Agent .
+
+
+###  http://purl.org/ontology/mo/MusicGroup
+mo:MusicGroup rdf:type owl:Class ;
+              rdfs:subClassOf mo:MusicArtist ,
+                              foaf:Group .
+
+
+###  http://purl.org/ontology/mo/SoloMusicArtist
+mo:SoloMusicArtist rdf:type owl:Class ;
+                   rdfs:subClassOf mo:MusicArtist ,
+                                   foaf:Person .
+
+
+###  http://www.example.com/vu/Award
+vu:Award rdf:type owl:Class .
+
+
+###  http://www.example.com/vu/Continent
+vu:Continent rdf:type owl:Class ;
+             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                   owl:onProperty vu:hasCountry ;
+                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass vu:Country
+                                 ] ;
+             rdfs:subClassOf vu:GeometryPlace .
+
+
+###  http://www.example.com/vu/Country
+vu:Country rdf:type owl:Class ;
+           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                 owl:onProperty vu:isOfContinent ;
+                                 owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass vu:Continent
+                               ] ;
+           rdfs:subClassOf vu:GeometryPlace .
+
+
+###  http://www.example.com/vu/CountryOfOrigin
+vu:CountryOfOrigin rdf:type owl:Class ;
+                   rdfs:subClassOf vu:Country .
+
+
+###  http://www.example.com/vu/CountryOfOriginGroup
+vu:CountryOfOriginGroup rdf:type owl:Class ;
+                        rdfs:subClassOf vu:CountryOfOrigin .
+
+
+###  http://www.example.com/vu/CountryOfOriginPerson
+vu:CountryOfOriginPerson rdf:type owl:Class ;
+                         rdfs:subClassOf vu:CountryOfOrigin .
+
+
+###  http://www.example.com/vu/GeometryContinent
+vu:GeometryContinent rdf:type owl:Class ;
+                     rdfs:subClassOf vu:Continent .
+
+
+###  http://www.example.com/vu/GeometryCountry
+vu:GeometryCountry rdf:type owl:Class ;
+                   rdfs:subClassOf vu:Country .
+
+
+###  http://www.example.com/vu/GeometryPlace
+vu:GeometryPlace rdf:type owl:Class ;
+                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                       owl:onProperty vu:hasPoint ;
+                                       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass wgs:Point
+                                     ] ;
+                 rdfs:subClassOf wgs:SpatialThing .
+
+
+###  http://www.example.com/vu/Lat
+vu:Lat rdf:type owl:Class ;
+       rdfs:subClassOf wgs:Point .
+
+
+###  http://www.example.com/vu/Lon
+vu:Lon rdf:type owl:Class ;
+       rdfs:subClassOf wgs:Point .
+
+
+###  http://www.example.com/vu/MusicAward
+vu:MusicAward rdf:type owl:Class ;
+              rdfs:subClassOf vu:Award ,
+                              vu:MusicRelatedThing .
+
+
+###  http://www.example.com/vu/MusicBrainzID
+vu:MusicBrainzID rdf:type owl:Class .
+
+
+###  http://www.example.com/vu/MusicFestival
+vu:MusicFestival rdf:type owl:Class ;
+                 rdfs:subClassOf vu:MusicRelatedThing .
+
+
+###  http://www.example.com/vu/MusicRelatedThing
+vu:MusicRelatedThing rdf:type owl:Class .
+
+
+###  http://www.example.com/vu/RecordLabel
+vu:RecordLabel rdf:type owl:Class ;
+               rdfs:subClassOf vu:MusicRelatedThing .
+
+
+###  http://xmlns.com/foaf/0.1/Agent
+foaf:Agent rdf:type owl:Class ;
+           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                 owl:onProperty vu:hasReceivedAward ;
+                                 owl:someValuesFrom vu:Award
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty vu:hasName ;
+                                 owl:minCardinality "1"^^xsd:nonNegativeInteger
+                               ] .
+
+
+###  http://xmlns.com/foaf/0.1/Group
+foaf:Group rdf:type owl:Class ;
+           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                 owl:onProperty vu:hasCountryOfOrigin ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass vu:CountryOfOriginGroup
+                               ] ;
+           rdfs:subClassOf foaf:Agent .
+
+
+###  http://xmlns.com/foaf/0.1/Person
+foaf:Person rdf:type owl:Class ;
+            owl:equivalentClass [ rdf:type owl:Restriction ;
+                                  owl:onProperty vu:hasCountryOfOrigin ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass vu:CountryOfOriginPerson
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty vu:hasGender ;
+                                  owl:minCardinality "1"^^xsd:nonNegativeInteger
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty vu:hasDateOfBirth ;
+                                  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onDataRange xsd:dateTime
+                                ] ;
+            rdfs:subClassOf foaf:Agent .
+
+
+###  https://www.w3.org/2003/01/geo/wgs84_pos/Point
+wgs:Point rdf:type owl:Class ;
+          rdfs:subClassOf wgs:SpatialThing .
+
+
+###  https://www.w3.org/2003/01/geo/wgs84_pos/SpatialThing
+wgs:SpatialThing rdf:type owl:Class .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
