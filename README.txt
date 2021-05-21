@@ -10,3 +10,5 @@ Please follow the following instructions in order to use the application:
 - Adjust the parameters in the way you like
 - Click on the "GO!" button and wait for the results to pop up!
 - If you want to perform another search-operation, you simply adjust the parameters and press the "GO!" button again
+
+## Please note that the .ttl file is not included in this repository (due to the size of the file). This file can be downloaded via this link: https://drive.google.com/file/d/1baGmYvVEZnpTMjEgY1SsWeuxUOMbVb__/view?usp=sharing
